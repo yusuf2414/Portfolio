@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yusuf Kiwanuka — Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{
+      --bg-1:#0b0f14; --bg-2:#1b222c; --text:#e7efff; --muted:#a9b9d1;
+      --accent:#79a8ff; --accent-2:#5d87ff; --card:#161b22;
+      --shadow:0 14px 40px rgba(0,0,0,.45); --radius:18px;
+
+      /* spacing */
+      --space-section:2rem;
+      --space-grid:1rem;
+      --space-card-pad:1rem;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 70% -10%, rgba(63,107,255,.28), transparent 60%),
+        radial-gradient(800px 420px at 50% 110%, rgba(63,107,255,.16), transparent 60%),
+        linear-gradient(180deg,#2a3a50 0%, #151a21 45%, #0b0f14 100%);
+      overflow-x:hidden; scroll-behavior:smooth;
+    }
+    a{color:var(--accent); text-decoration:none}
+    h1,h2,h3{letter-spacing:.02em; margin:0 0 .5rem}
+    h1{font-size:clamp(2rem,4.6vw,3rem);}
+    h2{font-size:clamp(1.4rem,3.6vw,2.2rem); color:var(--accent);}
+    p{line-height:1.65; color:var(--muted)}
+    .muted{color:var(--muted)}
+    .eyebrow{display:inline-flex; align-items:center; gap:.5rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.8rem; color:#d8e7ff}
+
+    /* Top bar */
+    .topbar{ position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(90deg, rgba(121,168,255,.22), rgba(93,135,255,.16));
+      border-bottom:1px solid rgba(255,255,255,.07);}
+    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:.5rem .75rem; max-width:1100px; margin:0 auto}
+    .pill{ padding:.7rem 1.1rem; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(121,168,255,.22), rgba(121,168,255,.1));
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); color:#fff; font-weight:700; letter-spacing:.02em}
+    .pill:hover{transform:translateY(-1px); box-shadow:0 10px 20px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.12)}
+
+    .container{max-width:1100px; margin:0 auto; padding:1.5rem 1rem}
+
+    /* Hero */
+    .hero{
+      display:grid; grid-template-columns:1.2fr .8fr;
+      align-items:start; gap:1rem; padding:1rem 0;
+    }
+    .hero img{
+      width:clamp(200px, 26vw, 320px); height:auto;
+      border-radius:50%; display:block;
+      box-shadow:0 0 0 12px rgba(93,135,255,.18), 0 25px 60px rgba(0,0,0,.5)
+    }
+    .hero h1{color:var(--accent); margin-bottom:.25rem}
+    .lead{font-size:1.05rem; margin:.2rem 0 .3rem}
+    .icon-row{display:flex; flex-wrap:wrap; gap:.5rem; margin:.4rem 0 0;}
+    .chip{display:inline-flex; align-items:center; gap:.5rem; padding:.6rem .8rem; border-radius:999px; color:#eff6ff;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);}
+    .chip:hover{background:rgba(255,255,255,.1)} .chip i{font-size:1rem}
+
+    /* Sections */
+    section{padding:var(--space-section) 0; border-top:1px solid rgba(255,255,255,.06)}
+    #about{padding-top:.8rem;}
+
+    /* Cards grid */
+    .grid{display:grid; gap:var(--space-grid); grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+    .card{background:var(--card); border-radius:var(--radius); padding:var(--space-card-pad); box-shadow:var(--shadow)}
+    .card h3{margin:.5rem 0 .35rem}
+    #about ul{margin:.6rem 0 0 1.1rem}
+    #about li{margin:.3rem 0}
+
+    /* Resume */
+    .cta-row{display:flex; flex-wrap:wrap; gap:.8rem; margin:1rem 0 1.1rem}
+    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1rem; border-radius:.9rem;
+      border:1px solid rgba(255,255,255,.12); background:var(--bg-2); color:#fff; font-weight:700}
+    .btn:hover{background:#222b36}
+    .resume-embed{width:100%; height:65vh; border:none; border-radius:var(--radius); box-shadow:var(--shadow); background:#0b0e12}
+
+    /* Drawer (mobile nav) */
+    .hamburger{position:fixed; left:.75rem; top:.75rem; z-index:60; width:44px; height:44px; border-radius:12px; background:var(--bg-2); border:1px solid rgba(255,255,255,.12); display:grid; place-items:center}
+    .hamburger i{font-size:1.1rem}
+    .drawer{position:fixed; inset:0; pointer-events:none}
+    .drawer.open{pointer-events:auto}
+    .drawer .backdrop{position:absolute; inset:0; background:rgba(0,0,0,.45); opacity:0; transition:.2s}
+    .drawer.open .backdrop{opacity:1}
+    .panel{position:absolute; top:0; left:0; height:100%; width:min(84vw,340px); background:linear-gradient(#233042, #0b0f14); border-right:1px solid rgba(255,255,255,.08); transform:translateX(-102%); transition:.25s ease; padding:1rem}
+    .drawer.open .panel{transform:none}
+    .panel h3{margin:.5rem 0 1rem; color:var(--accent); letter-spacing:.08em}
+    .panel .hr{height:1px; background:rgba(255,255,255,.15); margin:1rem 0}
+    .navlist{display:grid; gap:.6rem}
+    .navitem{display:flex; align-items:center; gap:.75rem; padding:.75rem .6rem; border-radius:12px; color:#cde0ff}
+    .navitem:hover{background:rgba(255,255,255,.06)}
+
+    footer{padding:1.5rem 1rem 2.5rem; text-align:center; color:#a9b9d1}
+
+    /* -------- Projects + Carousel -------- */
+    #projects .tablist{display:flex;flex-wrap:wrap;gap:.5rem;margin:.25rem 0 .8rem}
+    #projects .tab{cursor:pointer;padding:.55rem .9rem;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#cfe3ff;font-weight:700}
+    #projects .tab.active{background:linear-gradient(180deg, rgba(121,168,255,.22), rgba(121,168,255,.1));color:#fff}
+    #projects .proj-panel{display:none}
+    #projects .proj-panel.active{display:block}
+
+    .carousel{position:relative}
+    .track{
+      display:flex; gap:var(--space-grid);
+      overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:.25rem 0 1rem;
+      scrollbar-width:none;
+    }
+    .track::-webkit-scrollbar{display:none}
+
+    .project-card{
+      flex:0 0 clamp(280px,48%,520px);
+      scroll-snap-align:start;
+      background:var(--card); border-radius:var(--radius);
+      padding:1rem; box-shadow:var(--shadow); position:relative; overflow:hidden;
+    }
+    .project-card header h3{margin:0}
+    .project-card .subtitle{color:var(--muted);margin:.2rem 0 .5rem;font-size:.95rem}
+    .project-card .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:.25rem 0 .35rem}
+    .project-card .tag{font-size:.75rem;padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12)}
+    .project-card .kpis{margin:.4rem 0 0;padding-left:1.1rem}
+    .project-card .kpis li{margin:.2rem 0}
+
+    .carousel-btn{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:40px; height:40px; border-radius:999px; display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(121,168,255,.22), rgba(121,168,255,.08));
+      color:#fff; box-shadow:var(--shadow); cursor:pointer; z-index:2;
+    }
+    .carousel-btn:hover{box-shadow:0 8px 22px rgba(0,0,0,.35)}
+    .carousel-btn.prev{left:-.25rem}
+    .carousel-btn.next{right:-.25rem}
+    .carousel-btn[disabled]{opacity:.35; pointer-events:none}
+
+    /* -------- Experience bullets -------- */
+    .exp-bullets{list-style:disc; padding-left:1.25rem; margin:.5rem 0 0;}
+    .exp-bullets li{margin:.4rem 0 .35rem;}
+    .exp-bullets strong{color:#fff; font-weight:800;}
+    .exp-bullets .place{color:var(--accent); font-weight:700;}
+    .exp-bullets .time{color:var(--muted); font-weight:600;}
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr; text-align:left}
+      .topbar-inner{justify-content:center}
+      .carousel-btn.prev{left:.25rem}
+      .carousel-btn.next{right:.25rem}
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile hamburger -->
+  <button id="hamburger" class="hamburger" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+
+  <!-- Drawer -->
+  <div id="drawer" class="drawer" aria-hidden="true">
+    <div class="backdrop" role="button" aria-label="Close navigation"></div>
+    <aside class="panel" aria-label="Sidebar navigation">
+      <h3>NAVIGATION</h3>
+      <div class="hr"></div>
+      <nav class="navlist">
+        <a class="navitem" href="#home"><i class="fa-solid fa-house"></i> Home</a>
+        <a class="navitem" href="#about"><i class="fa-solid fa-user"></i> About Me</a>
+        <a class="navitem" href="#projects"><i class="fa-solid fa-briefcase"></i> Projects</a>
+        <a class="navitem" href="#experience"><i class="fa-solid fa-timeline"></i> Experience</a>
+        <a class="navitem" href="#skills"><i class="fa-solid fa-wand-magic-sparkles"></i> Skills</a>
+        <a class="navitem" href="#education"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+        <a class="navitem" href="#resume"><i class="fa-solid fa-file-lines"></i> Resume</a>
+        <a class="navitem" href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+      </nav>
+    </aside>
+  </div>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="pill" href="#about"><i class="fa-solid fa-user"></i> GET TO KNOW ME!</a>
+      <div class="pill" aria-current="page">Yusuf Kiwanuka</div>
+      <a class="pill" href="#contact"><i class="fa-solid fa-comments"></i> CONNECT WITH ME!</a>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <span class="eyebrow"><i class="fa-solid fa-location-dot"></i> San Diego, CA</span>
+        <h1 id="hero-title">Precision Over<br>Power</h1>
+        <p class="lead">Welcome to <strong>Yusuf Kiwanuka's Profile</strong></p>
+        <p class="lead">Statistician · Data Analyst · Data Scientist</p>
+        <div class="icon-row">
+          <a class="chip" href="#resume"><i class="fa-solid fa-file-pdf"></i><span>Resume</span></a>
+          <a class="chip" href="#projects"><i class="fa-solid fa-diagram-project"></i><span>Projects</span></a>
+          <a class="chip" href="#contact"><i class="fa-regular fa-envelope"></i><span>Contact</span></a>
+          <a class="chip" href="https://www.linkedin.com/in/yusuf-kiwanuka-8511ba122/" target="_blank" rel="noopener">
+            <i class="fa-brands fa-linkedin"></i><span>LinkedIn</span>
+          </a>
+          <a class="chip" href="https://github.com/yusuf2414" target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i><span>GitHub</span>
+          </a>
+        </div>
+      </div>
+      <div><img src="yusuf.jpg" alt="Headshot of Yusuf Kiwanuka" /></div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title">ABOUT ME</h2>
+      <p><strong>Ms Statistics Graduate</strong> with hands-on experience in Data Engineering and Machine learning : Skilled in Data cleaning, Transformation, Pipeline development, and Statistical modeling.</p>
+      <ul>
+        <li><strong>Programming:</strong> Python &amp; R</li>
+        <li><strong>Data Visualization:</strong> Tableau, Power BI, Matplotlib, Seaborn etc</li>
+        <li><strong>Databases:</strong> PostgreSQL, MySQL, MongoDB, Excel</li>
+        <li><strong>Cloud &amp; Tools:</strong> AWS EC2, Amazon Redshift, GitHub, Docker ,Jupyter Notebooks</li>
+        <li><strong>Statistical Methods:</strong> Bayesian Statistics, Time Series, Simulations</li>
+        <li><strong>Data Engineering:</strong> ETL processes, Data cleaning, Transformation, Pipeline development</li>
+      </ul>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">PROJECTS</h2>
+      <div class="tablist" role="tablist" aria-label="Projects Tabs">
+        <button class="tab active" data-target="work">Work Projects</button>
+        <button class="tab" data-target="other">Other Projects (5) </button>
+        <button class="tab" data-target="research">Research</button>
+      </div>
+
+      <!-- Work Projects -->
+      <div id="work" class="proj-panel active" role="tabpanel" aria-label="Work Projects">
+        <div class="carousel" data-carousel>
+          <button class="carousel-btn prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="track" data-track>
+            <article class="project-card">
+              <header>
+                <h3>Automated Reporting &amp; Analytics Pipeline</h3>
+                <p class="subtitle"><i class="fa-solid fa-gears"></i> Google APIs · Tableau REST API · Cron Jobs</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">ETL</span><span class="tag">Google APIs</span>
+                  <span class="tag">Tableau</span><span class="tag">Automation</span>
+                </div>
+              </header>
+              <p>Built an automated data pipeline for real-time ingestion and scheduled report distribution. Connecting to the Amazon Redshift PostgreSQL database eliminated manual work and kept stakeholders’ dashboards up to date.</p>
+              <ul class="kpis">
+                <li><i class="fa-solid fa-rotate"></i> Auto-refresh at Systematic Times</li>
+                <li><i class="fa-solid fa-chart-line"></i> Doubled reporting frequency</li>
+              </ul>
+            </article>
+
+            <article class="project-card">
+              <header>
+                <h3>Cross-Regional Stock Ops &amp; Predictive Dashboard</h3>
+                <p class="subtitle"><i class="fa-solid fa-truck-ramp-box"></i> Inventory visibility · Forecasting · 4 countries</p>
+                <div class="tags">
+                  <span class="tag">Analytics</span><span class="tag">Dashboards</span>
+                  <span class="tag">Time Series</span><span class="tag">Training</span>
+                </div>
+              </header>
+              <p>Led development and training for a stock ops dashboard providing real-time inventory and stock-out forecasting, enabling proactive supply chain decisions across Kenya , Mozambique , Zambia and Uganda.</p>
+              <ul class="kpis">
+                <li><i class="fa-solid fa-circle-nodes"></i> Unified cross-country view</li>
+                <li><i class="fa-solid fa-magnifying-glass-chart"></i> Predictive Stock-out Alerts Per Region and Branch</li>
+              </ul>
+            </article>
+
+            <article class="project-card">
+              <header>
+                <h3>Business Loans Launch — Data Pipeline &amp; Profit Forecasting</h3>
+                <p class="subtitle"><i class="fa-solid fa-briefcase"></i> Credit metrics · Intake pipeline · ISO-style documentation</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">ETL</span>
+                  <span class="tag">Forecasting</span><span class="tag">Dashboards</span>
+                </div>
+              </header>
+              <p>As the lead analyst for a new business-loan product, I defined core risk &amp; performance metrics, designed the end-to-end intake pipeline (Application → Credit → Collections), and established weekly KPI reviews with revenue/profit forecasting to guide rollout decisions.</p>
+              <ul class="kpis">
+                <li><i class="fa-solid fa-bullseye"></i> Clear loan-quality metrics for underwriting &amp; collections</li>
+                <li><i class="fa-solid fa-diagram-project"></i> Repeatable pipeline from customer intake to credit analysis</li>
+                <li><i class="fa-solid fa-sack-dollar"></i> Framework to forecast revenue &amp; profit from sales and collections</li>
+                <li><i class="fa-solid fa-file-shield"></i> Process documentation aligned to ISO-style standards</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Projects -->
+      <div id="other" class="proj-panel" role="tabpanel" aria-label="Other Projects">
+        <div class="carousel" data-carousel>
+          <!-- ALWAYS VISIBLE arrows -->
+          <button class="carousel-btn prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+
+          <div class="track" data-track>
+            <!-- 1 -->
+            <article class="project-card">
+              <header>
+                <h3>YouTube Sentiment &amp; Hate Speech Analysis</h3>
+                <p class="subtitle"><i class="fa-solid fa-comments"></i> AWS EC2 · Docker · REST API</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Toxicity</span>
+                  <span class="tag">Docker</span><span class="tag">AWS</span>
+                </div>
+              </header>
+              <p>End-to-end NLP system analyzing comments to rate videos using sentiment and hateful content detection; results exposed via API and dashboard.</p>
+            </article>
+
+            <!-- 2 -->
+            <article class="project-card">
+              <header>
+                <h3>Ebola Outbreak Tracking via Twitter</h3>
+                <p class="subtitle"><i class="fa-solid fa-virus"></i> Real-time classification · Geolocation</p>
+                <div class="tags">
+                  <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Geospatial</span><span class="tag">Dashboards</span>
+                </div>
+              </header>
+              <p>Pipeline to classify and geolocate tweets, surfacing potential hotspots and visualizing them on a dashboard for early warning.</p>
+            </article>
+
+            <!-- 3 -->
+            <article class="project-card">
+              <header>
+                <h3>Bankruptcy Prediction</h3>
+                <p class="subtitle"><i class="fa-solid fa-building-columns"></i> Feature engineering · Model explainability</p>
+                <div class="tags">
+                  <span class="tag">PCA</span><span class="tag">Logistic Regression</span><span class="tag">Combined Supervised and Unsupervised ML</span>
+                </div>
+              </header>
+              <p>Built interpretable models to predict corporate bankruptcy using economic and risk indicators. Employed PCA for data exploration and logistic regression to identify key drivers of financial distress</p>
+            </article>
+
+            <!-- 4 -->
+            <article class="project-card">
+              <header>
+                <h3>FHLB Lending Explorer (2019–2023)</h3>
+                <p class="subtitle"><i class="fa-solid fa-house-chimney"></i> Lightweight static site · Preprocessed visuals</p>
+                <div class="tags">
+                  <span class="tag">Static Site</span><span class="tag">DataViz</span>
+                  <span class="tag">Housing</span><span class="tag">Equity</span>
+                </div>
+              </header>
+              <p>A lightweight, image-first site that explores mortgage loans associated with FHLB banks. It highlights where lending goes across <em>income tiers</em>, <em>risk levels</em>, and <em>community diversity</em>—helping assess alignment with affordable-housing and community-development goals.</p>
+              <ul class="kpis">
+                <li><i class="fa-solid fa-bolt"></i> Preprocessed charts for instant load (no server required)</li>
+                <li><i class="fa-solid fa-filter"></i> Views by income, risk, and diversity to spotlight underserved areas</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research -->
+      <div id="research" class="proj-panel" role="tabpanel" aria-label="Research Projects">
+        <div class="carousel" data-carousel>
+          <button class="carousel-btn prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="carousel-btn next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="track" data-track>
+            <article class="project-card">
+              <header>
+                <h3>Small Area Estimation (Research)</h3>
+                <p class="subtitle"><i class="fa-solid fa-flask"></i> R · Clustering methods · Survey statistics</p>
+                <div class="tags">
+                  <span class="tag">R</span><span class="tag">Area level Models</span><span class="tag">Clustering</span>
+                  <span class="tag">RMSE</span><span class="tag">ARI</span><span class="tag">ADMM Alogrithm</span>
+                </div>
+              </header>
+              <p>Worked with my professor in developing new clustering methods for SAE — simulations show faster processing and lower RMSE.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title">EXPERIENCE</h2>
+      <ul class="exp-bullets" aria-label="Experience timeline">
+        <li>
+          <strong>Graduate Research &amp; Teaching Assistant</strong>,
+          <span class="place">San Diego State University (SDSU)</span>
+          <span class="time">— Jan 2025 – Present</span>
+        </li>
+        <li>
+          <strong>Operations Analyst</strong>,
+          <span class="place">Engie Energy Access</span>
+          <span class="time">— Jul 2023 – Jul 2024</span>
+        </li>
+        <li>
+          <strong>Business Analyst</strong>,
+          <span class="place">Platinum Credit Limited</span>
+          <span class="time">— Jan 2020 – Jun 2023</span>
+        </li>
+        <li>
+          <strong>Data Analyst</strong>,
+          <span class="place">Platinum Credit Limited</span>
+          <span class="time">— Sep 2018 – Dec 2019</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">SKILLS</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Programming &amp; Tools</h3>
+          <p>Python, R, SQL, NoSQL, AWS, Tableau, MongoDB, Docker</p>
+          <p class="muted">ML: Scikit-learn, TensorFlow, PyTorch , NLP techniques , Hugging Face</p>
+        </article>
+        <article class="card"><h3>Data &amp; ML</h3><p>ETL &amp;, EDA/Visualization, Time series, Statistical modeling, Predictive Analytics</p></article>
+        <article class="card"><h3>Extras</h3><p>Git, Linux Cron Jobs, Model Evaluation, API Usage</p></article>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" aria-labelledby="education-title">
+      <h2 id="education-title">EDUCATION</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>San Diego State University</h3>
+          <p><strong>Masters of Statistics</strong> : 2024 – 2026 • GPA 3.95</p>
+        </article>
+        <article class="card">
+          <h3>Makerere University</h3>
+          <p><strong>Bachelor's Degree in Statistics</strong> : 2013 – 2017</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Resume -->
+    <section id="resume" aria-labelledby="resume-title">
+      <h2 id="resume-title">RESUME</h2>
+      <div class="cta-row">
+        <a class="btn" href="Resume_YusufKiwanuka.pdf" download><i class="fa-solid fa-print"></i> Print or Download</a>
+        <a class="btn" href="mailto:kiwanuka11@gmail.com"><i class="fa-regular fa-envelope"></i> Email</a>
+      </div>
+      <iframe class="resume-embed" src="Resume_YusufKiwanuka.pdf" title="Resume PDF preview"></iframe>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">GET IN TOUCH!</h2>
+      <p>Email: <a href="mailto:kiwanuka11@gmail.com">kiwanuka11@gmail.com</a></p>
+      <p>Phone: <a href="tel:+16197642262">(619) 764-2262</a></p>
+      <div class="icon-row" style="margin-top:.6rem">
+        <a class="chip" href="mailto:kiwanuka11@gmail.com"><i class="fa-regular fa-envelope"></i><span>Email</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="y"></span> Yusuf Kiwanuka</footer>
+
+  <script>
+    // Drawer open/close
+    const drawer = document.getElementById('drawer');
+    const hamburger = document.getElementById('hamburger');
+    const backdrop = drawer.querySelector('.backdrop');
+    const toggleDrawer = (open) => {
+      drawer.classList.toggle('open', open);
+      drawer.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    hamburger.addEventListener('click', ()=> toggleDrawer(!drawer.classList.contains('open')));
+    backdrop.addEventListener('click', ()=> toggleDrawer(false));
+    drawer.addEventListener('keydown', (e)=>{ if(e.key==='Escape') toggleDrawer(false); });
+    document.querySelectorAll('.panel a').forEach(a=> a.addEventListener('click', ()=> toggleDrawer(false)));
+
+    // Tabs
+    const projTabs = document.querySelectorAll('#projects .tab');
+    const projPanels = document.querySelectorAll('#projects .proj-panel');
+    projTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        projTabs.forEach(t => t.classList.remove('active'));
+        projPanels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const target = document.getElementById(tab.dataset.target);
+        if (target) target.classList.add('active');
+      });
+    });
+
+    // Carousel logic for each panel (arrows always visible)
+    function initCarousel(root){
+      const track = root.querySelector('[data-track]');
+      const prev = root.querySelector('.prev');
+      const next = root.querySelector('.next');
+      if (!track || !prev || !next) return;
+
+      const by = () => Math.max(track.clientWidth * 0.9, 280); // scroll amount
+
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth - 2; // tolerance
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max;
+        // Always show arrows so users know they can scroll
+        prev.style.display = 'grid';
+        next.style.display = 'grid';
+      };
+
+      prev.addEventListener('click', () => track.scrollBy({left: -by(), behavior: 'smooth'}));
+      next.addEventListener('click', () => track.scrollBy({left:  by(), behavior: 'smooth'}));
+      track.addEventListener('scroll', update, {passive:true});
+      window.addEventListener('resize', update);
+
+      // Initial state
+      update();
+      setTimeout(update, 50);
+    }
+
+    document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
